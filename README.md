@@ -1,1 +1,1 @@
-# Typescript-GraphQL-server-with-authentication
+## Typescript-GraphQL-server-with-authentication
