@@ -2,6 +2,7 @@
 import { createConnection } from "typeorm";
 import { ApolloServer } from "apollo-server-express";
 import * as express from "express";
+import * as session from "express-session";
 import { typeDefs } from "./typeDef";
 import { resolvers } from "./resolver";
 
@@ -9,12 +10,21 @@ const startServer = async () => {
   const server = new ApolloServer({
     // These will be defined for both new or existing servers
     typeDefs,
-    resolvers
+    resolvers,
+    context: ({ req }: any) => ({ req })
   });
 
   await createConnection();
 
   const app = express();
+
+  app.use(
+    session({
+      secret: "abcdefghijkl",
+      resave: false,
+      saveUninitialized: false
+    })
+  );
 
   server.applyMiddleware({ app }); // app is from an existing express app
 
