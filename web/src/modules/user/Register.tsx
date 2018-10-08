@@ -1,6 +1,16 @@
 import * as React from "react";
+import { Mutation } from "react-apollo";
+import { gql } from "apollo-boost";
+import { RouteComponentProps } from "react-router-dom";
+import { RegisterMutationVariables, RegisterMutation } from "../../schemaTypes";
 
-export class Register extends React.PureComponent {
+const registerMutation = gql`
+  mutation RegisterMutation($email: String!, $password: String!) {
+    register(email: $email, password: $password)
+  }
+`;
+
+export class Register extends React.PureComponent<RouteComponentProps<{}>> {
   state = {
     email: "",
     password: ""
@@ -15,34 +25,50 @@ export class Register extends React.PureComponent {
   render() {
     const { password, email } = this.state;
     return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center"
-        }}
+      <Mutation<RegisterMutation, RegisterMutationVariables>
+        mutation={registerMutation}
       >
-        <div>
-          <input
-            type="text"
-            placeholder="email"
-            name="email"
-            value={email}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div>
-          <input
-            type="password"
-            placeholder="password"
-            name="password"
-            value={password}
-            onChange={this.handleChange}
-          />
-        </div>
-        <button onClick={() => console.log("clicked")}>register</button>
-      </div>
+        {mutate => (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+          >
+            <div>
+              <input
+                type="text"
+                placeholder="email"
+                name="email"
+                value={email}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div>
+              <input
+                type="password"
+                placeholder="password"
+                name="password"
+                value={password}
+                onChange={this.handleChange}
+              />
+            </div>
+            <button
+              onClick={async () => {
+                const response = await mutate({
+                  variables: this.state
+                });
+                console.log(response);
+                this.props.history.push("/login");
+              }}
+            >
+              register
+            </button>
+          </div>
+        )}
+      </Mutation>
     );
   }
 }
