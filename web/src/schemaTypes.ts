@@ -2,6 +2,23 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: TestQuery
+// ====================================================
+
+export interface TestQuery_me {
+  id: string;
+  email: string;
+  type: string;
+}
+
+export interface TestQuery {
+  me: TestQuery_me | null;
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: CreateSubscriptionMutation
 // ====================================================
 
@@ -53,22 +70,6 @@ export interface RegisterMutation {
 export interface RegisterMutationVariables {
   email: string;
   password: string;
-}
-
-/* tslint:disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: TestQuery
-// ====================================================
-
-export interface TestQuery_me {
-  id: string;
-  email: string;
-}
-
-export interface TestQuery {
-  me: TestQuery_me | null;
 }
 
 /* tslint:disable */

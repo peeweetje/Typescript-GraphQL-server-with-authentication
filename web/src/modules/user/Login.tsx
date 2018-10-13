@@ -62,7 +62,7 @@ export class Login extends React.PureComponent<RouteComponentProps<{}>> {
                   variables: this.state
                 });
                 console.log(response);
-                this.props.history.push("/testview");
+                this.props.history.push("/account");
               }}
             >
               login
