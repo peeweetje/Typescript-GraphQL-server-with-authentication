@@ -33,7 +33,8 @@ export default class Account extends React.PureComponent {
           if (data.me.type === "free-trial") {
             return <SubscribeUser />;
           }
-          // if (data.me.type === 'paid)
+          console.log(data.me);
+          // if (data.me.type === 'standard paid')
           return <div>Thank you for purchasing our product</div>;
         }}
       </Query>
