@@ -4,15 +4,15 @@ import { gql } from "apollo-boost";
 import { RouteComponentProps } from "react-router-dom";
 import { LoginMutationVariables, LoginMutation } from "../../schemaTypes";
 import { testQuery } from "../../graphql/queries/me";
+import { userFragment } from "src/graphql/fragments/UserFragment";
 
 const loginMutation = gql`
   mutation LoginMutation($email: String!, $password: String!) {
     login(email: $email, password: $password) {
-      id
-      email
-      type
+      ...UserInfo
     }
   }
+  ${userFragment}
 `;
 
 export class Login extends React.PureComponent<RouteComponentProps<{}>> {

@@ -6,15 +6,15 @@ import {
   CreateSubscriptionMutation,
   CreateSubscriptionMutationVariables
 } from "../../schemaTypes";
+import { userFragment } from "src/graphql/fragments/UserFragment";
 
 const createSubscriptionMutation = gql`
-  mutation CreateSubscriptionMutation($source: String!) {
-    createSubscription(source: $source) {
-      id
-      email
-      type
+  mutation CreateSubscriptionMutation($source: String!, $ccLast4: String!) {
+    createSubscription(source: $source, ccLast4: $ccLast4) {
+      ...UserInfo
     }
   }
+  ${userFragment}
 `;
 
 export default class SubscribeUser extends React.PureComponent {
@@ -27,7 +27,7 @@ export default class SubscribeUser extends React.PureComponent {
           <StripeCheckout
             token={async token => {
               const response = await mutate({
-                variables: { source: token.id }
+                variables: { source: token.id, ccLast4: token.card.last4 }
               });
               console.log(response);
             }}
