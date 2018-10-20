@@ -5,6 +5,7 @@ import { TestQuery } from "../../schemaTypes";
 import SubscribeUser from "./SubscribeUser";
 import { testQuery } from "src/graphql/queries/me";
 import { ChangeCreditCard } from "./ChangeCreditCard";
+import CancelSubscription from "./CancelSubscription";
 
 export default class Account extends React.PureComponent {
   render() {
@@ -32,6 +33,7 @@ export default class Account extends React.PureComponent {
                 Your current last 4 digits of your creditcard: {data.me.ccLast4}
               </div>
               <ChangeCreditCard />
+              <CancelSubscription />
             </div>
           );
         }}
