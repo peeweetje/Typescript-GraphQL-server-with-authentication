@@ -58,9 +58,7 @@ export const resolvers: IResolvers = {
         stripeId = customer.id;
       } else {
         // update customer
-        await stripe.customers.update(stripeId, {
-          source
-        });
+        await stripe.customers.update(stripeId, { source });
         await stripe.subscriptions.create({
           customer: stripeId,
           items: [
@@ -78,7 +76,6 @@ export const resolvers: IResolvers = {
 
       return user;
     },
-
     changeCreditCard: async (_, { source, ccLast4 }, { req }) => {
       if (!req.session || !req.session.userId) {
         throw new Error("not authenticated");
@@ -96,7 +93,6 @@ export const resolvers: IResolvers = {
 
       return user;
     },
-
     cancelSubscription: async (_, __, { req }) => {
       if (!req.session || !req.session.userId) {
         throw new Error("not authenticated");
@@ -111,7 +107,7 @@ export const resolvers: IResolvers = {
 
       const [subscription] = stripeCustomer.subscriptions.data;
 
-      await stripe.subscriptionItems.del(subscription.id);
+      await stripe.subscriptions.del(subscription.id);
 
       await stripe.customers.deleteCard(
         user.stripeId,

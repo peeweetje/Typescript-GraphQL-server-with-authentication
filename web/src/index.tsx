@@ -4,6 +4,7 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import { Routes } from "./Routes";
 import registerServiceWorker from "./registerServiceWorker";
+import { createGlobalStyle } from "styled-components";
 
 // Pass your GraphQL endpoint to uri
 const client = new ApolloClient({
@@ -11,8 +12,22 @@ const client = new ApolloClient({
   credentials: "include"
 });
 
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: rgb(255, 254, 252);
+  }
+  *:focus {
+    outline: 0;
+  }
+  a {
+    color: #0d0d0d;
+    text-decoration: none;
+  }
+`;
+
 ReactDOM.render(
   <ApolloProvider client={client}>
+    <GlobalStyle />
     <Routes />
   </ApolloProvider>,
   document.getElementById("root") as HTMLElement

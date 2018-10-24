@@ -5,7 +5,7 @@ import { TestQuery } from "../../schemaTypes";
 import SubscribeUser from "./SubscribeUser";
 import { testQuery } from "src/graphql/queries/me";
 import { ChangeCreditCard } from "./ChangeCreditCard";
-import CancelSubscription from "./CancelSubscription";
+import { CancelSubscription } from "./CancelSubscription";
 
 export default class Account extends React.PureComponent {
   render() {
