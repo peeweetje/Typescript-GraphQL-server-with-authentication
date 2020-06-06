@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@types/express-session": "^1.15.11",
-    "apollo-server-express": "^2.1.0",
+    "apollo-server-express": "^2.14.2",
     "bcryptjs": "^2.4.3",
     "d": "^1.0.0",
     "dotenv": "^6.1.0",
